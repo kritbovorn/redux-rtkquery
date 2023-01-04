@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import LinearGradient from "react-native-linear-gradient";
-import NavGradientSVG from "../../../../lineargradient/nav_gradient_svg";
 import { colors, gbs, sc } from "../../../../utils/import/import_options";
 
 type Props = {
@@ -10,19 +9,20 @@ type Props = {
     hasIcon?: boolean,
     hasBorder?: boolean
     icon?: ReactNode,
-    color?: string
+    color?: string,
+    backgroundColor?: string,
+    borderColor?: string
 }
 
-const ButtonSingleComponent = ({ title, onPress, hasIcon, icon, color, hasBorder = false }: Props) => {
+const ButtonSingleComponent = ({ title, onPress, hasIcon, icon, color, backgroundColor, borderColor, hasBorder = false }: Props) => {
     return (
 
         <View style={[{ height: sc.buttonHeight, flexDirection: 'row' }]}>
-            <View style={[styles.button, { borderWidth: hasBorder ? sc.minSpace : 0, borderColor: hasBorder ? 'red' : '', backgroundColor: hasBorder ? colors.white : colors.white }]}>
+            <View style={[styles.button, { borderWidth: hasBorder ? sc.minSpace : 0, borderColor: hasBorder ? borderColor ?? "red" : "", backgroundColor: hasBorder ? colors.white : colors.white }]}>
                 <TouchableHighlight
 
                     underlayColor={'lavender'}
                     onPress={() => onPress()}
-                    onHideUnderlay={() => <NavGradientSVG />}
                     style={{ flex: 1, backgroundColor: "", alignItems: 'center', justifyContent: 'center' }}
                 >
                     {!hasBorder
@@ -45,7 +45,7 @@ const ButtonSingleComponent = ({ title, onPress, hasIcon, icon, color, hasBorder
                                 : <Text style={[gbs.head, { color: color ?? colors.white }]}>{title}</Text>
                             }
                         </LinearGradient>
-                        :  <View style={[{flex: 1, width: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}]}>
+                        :  <View style={[{flex: 1, width: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: backgroundColor ?? 'white'}]}>
                             {hasIcon
                                 ? <View style={[{ flex: 1, flexDirection: 'row' }]}>
                                     <View style={[{ flex: 1 }]}></View>
