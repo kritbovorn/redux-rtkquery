@@ -1,16 +1,15 @@
 import React from "react";
-import { Text ,View} from 'react-native';
+import { Provider } from 'react-redux'
+import { store } from "./src/redux_toolkit/app/store";
+import RootScreen from "./src/screens/root_screen";
 
 const App = () => {
-  
-  return (  
-     <View style={[]} > 
-      
-    </View>
+
+  return (
+    <Provider store={store}>
+      <RootScreen />
+    </Provider>
   );
 }
 
 export default App;
-
-
-
